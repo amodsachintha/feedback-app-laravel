@@ -21,6 +21,7 @@ class CreateServicesRecordsTable extends Migration
             $table->integer('service_id');
             $table->string('description')->nullable();
             $table->timestamp('date_time')->default(Carbon::now());
+            $table->integer('n')->default(1);
             $table->boolean('resolved')->default(false);
             $table->timestamps();
 

@@ -15,7 +15,7 @@
                     <div class="panel-body">
                         <form action="/check/id" method="GET">
                             <div class="form-group">
-                                <input type="text" class="form-control " name="form-id" required>
+                                <input type="text" class="form-control " name="nic" required>
                                 <code>
                                     <small>**Enter the National ID number here</small>
                                 </code>

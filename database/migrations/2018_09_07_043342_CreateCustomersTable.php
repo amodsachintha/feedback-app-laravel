@@ -17,6 +17,7 @@ class CreateCustomersTable extends Migration
             $table->mediumIncrements('id');
             $table->string('nic')->unique();
             $table->string('name');
+            $table->text('address')->nullable();
             $table->string('mobile')->nullable();
             $table->timestamps();
 

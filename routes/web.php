@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/check/id','AppController@checkID');
+
+
+Route::post('/add/customer','AppController@addCustomer');
+Route::get('/add/servicerecord','AppController@addServiceRecord');
+
+
+Route::get('/update/service/visit','AppController@incrementVisit');
+Route::get('/update/service/resolve','AppController@setResolved');
