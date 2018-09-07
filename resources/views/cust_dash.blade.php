@@ -4,7 +4,7 @@
     <div class="container" style="font-family: sans-serif">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-success">
+                <div class="panel panel-success" style="-webkit-filter: drop-shadow(1px 2px 2px #09a21c); background-color: #fffffe">
                     <div class="panel-heading">
                         Person Info
                     </div>
@@ -41,7 +41,7 @@
 
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
+                <div class="panel panel-default" style="-webkit-filter: drop-shadow(1px 2px 2px gray); background-color: #fffffe">
                     <div class="panel-heading">
                         Record New Service
                     </div>
@@ -71,50 +71,68 @@
                 </div>
             </div>
         </div>
-
-
-        @if(isset($pending))
-            @foreach($pending as $service)
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        @if($service->n == 1)
-                            <div class="panel panel-primary">
-                                @elseif($service->n < 3)
-                                    <div class="panel panel-warning">
-                                        @elseif($service->n >= 3)
-                                            <div class="panel panel-danger">
-                                                @endif
-                                                <div class="panel-heading">
-                                                    {{$service->service}}
-                                                </div>
-                                                <div class="panel-body">
-                                                    @if($service->description != "" || $service->description != null)
-                                                        <p>Description: <strong>{{$service->description}}</strong></p>
-                                                    @endif
-                                                    <p>First Visit: <strong>{{date('d M Y h:i:s A',strtotime($service->date_time))}}</strong></p>
-                                                    @if($service->n != 1)
-                                                        <p>Last Visit: <strong>{{date('d M Y h:i:s A',strtotime($service->updated_at))}}</strong></p>
-                                                    @endif
-                                                    <p>Visits: <strong>{{$service->n}}</strong></p>
-                                                    <p>
-                                                        <button class="btn btn-primary" onclick="if(confirm('Are you sure?')) setResolved('{{$customer->nic}}','{{$service->service_id}}')"
-                                                                style="margin-right: 30px">Set Resolved
-                                                        </button>
-                                                        <button class="btn btn-danger"
-                                                                onclick="if(confirm('Are you sure?')) incrementVisit('{{$customer->nic}}','{{$service->service_id}}','{{$service->n}}')">Update Visit
-                                                        </button>
-                                                    </p>
-                                                </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-primary" style="-webkit-filter: drop-shadow(1px 2px 2px #006dad); background-color: #fffffe">
+                    <div class="panel-heading">
+                        සක්රීය සේවා
+                    </div>
+                    <div class="panel-body">
+                        @if(isset($pending))
+                            @foreach($pending as $service)
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @if($service->n == 1)
+                                            <div class="panel panel-primary">
+                                                @elseif($service->n < 3)
+                                                    <div class="panel panel-warning">
+                                                        @elseif($service->n >= 3)
+                                                            <div class="panel panel-danger">
+                                                                @endif
+                                                                <div class="panel-heading">
+                                                                    {{$service->service}}
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    @if($service->description != "" || $service->description != null)
+                                                                        <p>Description: <strong>{{$service->description}}</strong></p>
+                                                                    @endif
+                                                                    <p>First Visit: <strong>{{date('d M Y h:i:s A',strtotime($service->date_time))}}</strong></p>
+                                                                    @if($service->n != 1)
+                                                                        <p>Last Visit: <strong>{{date('d M Y h:i:s A',strtotime($service->updated_at))}}</strong></p>
+                                                                    @endif
+                                                                    <p>Visits: <strong>{{$service->n}}</strong></p>
+                                                                    <p>
+                                                                        <button class="btn btn-primary"
+                                                                                onclick="if(confirm('Are you sure?')) setResolved('{{$customer->nic}}','{{$service->service_id}}')"
+                                                                                style="margin-right: 30px">Set Resolved
+                                                                        </button>
+                                                                        <button class="btn btn-danger"
+                                                                                onclick="if(confirm('Are you sure?')) incrementVisit('{{$customer->nic}}','{{$service->service_id}}','{{$service->n}}')">
+                                                                            Update
+                                                                            Visit
+                                                                        </button>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                    </div>
                                             </div>
+                                            @endforeach
+                                        @endif
                                     </div>
-                            </div>
-                            @endforeach
+                                </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px">
+                    <div class="col-md-2 col-md-offset-5" align="center">
+                        @if(isset($_SERVER['HTTP_REFERER']))
+                            <a href="{{$_SERVER['HTTP_REFERER']}}" class="btn btn-default">Back</a>
                         @endif
                     </div>
-
-
                 </div>
+            </div>
+        </div>
     </div>
+
     <script type="text/javascript">
         function setResolved(nic, service_id) {
             var ajax = new XMLHttpRequest();

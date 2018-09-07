@@ -16,11 +16,15 @@
 <body style="background:#ffffff;">
 <div id="app">
     <nav class="navbar navbar-default navbar-static-top" style="background: rgb(252, 248, 227);">
-        <div class="container" style="padding-bottom: 5px">
+        <div class="container" style="padding-bottom: 5px;">
             <div class="navbar-header">
                 <a class="navbar-brand" href="{{ url('/') }}" style="margin-top: -7px">
                     <label style="color: black"><img src="{{asset("img/logo.png")}}" height="40px"> &nbsp;Feedback App v1.0</label>
                 </a>
+            </div>
+            <div class="navbar-right" style="padding-top: 7px;">
+                <a href="/view/customers/all/unresolved" class="btn btn-danger" >View All Unresolved</a>
+                <a href="/view/customers/all/all" class="btn btn-default">View All Customers</a>
             </div>
         </div>
     </nav>

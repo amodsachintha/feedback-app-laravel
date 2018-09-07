@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/view/customers/all/unresolved','AppController@viewAllUnresolvedCustomers');
+Route::get('/view/customers/all/all','AppController@viewAllCustomers');
 
 Route::get('/check/id','AppController@checkID');
 

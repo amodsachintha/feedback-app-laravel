@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use function Sodium\add;
 
 class AppController extends Controller
 {
@@ -38,8 +37,6 @@ class AppController extends Controller
                 ->where('feedback_service_records.customer_nic', $nic)
                 ->where('feedback_service_records.resolved', false)
                 ->get();
-
-//            return response()->json($services_pending);
 
             return view('cust_dash', ['customer' => $cust, 'pending' => $services_pending, 'services' => $services]);
         }
@@ -77,7 +74,6 @@ class AppController extends Controller
                 'created_at' => Carbon::now(),
             ]);
 
-//todo redirect to customer dashboard
         $services = DB::table('feedback_services')
             ->get();
 
@@ -147,6 +143,26 @@ class AppController extends Controller
             ]);
 
         return response()->json(['status' => 'ok']);
+    }
+
+    public function viewAllUnresolvedCustomers(){
+        $customers = DB::table('feedback_customers')
+                    ->join('feedback_service_records','feedback_service_records.customer_nic','feedback_customers.nic')
+                    ->where('feedback_service_records.resolved',false)
+                    ->select(['nic','name','address','mobile',DB::raw('count(customer_nic) as count')])
+                    ->groupBy('customer_nic')
+                    ->orderBy('feedback_customers.created_at','DESC')
+                    ->paginate(10);
+        $i=1;
+        return view('all_unresolved',['customers'=>$customers,'i'=>$i]);
+    }
+
+    public function viewAllCustomers(){
+        $customers = DB::table('feedback_customers')
+            ->orderBy('feedback_customers.created_at','DESC')
+            ->paginate(10);
+        $i=1;
+        return view('all_customers',['customers'=>$customers,'i'=>$i]);
     }
 
 

@@ -8,7 +8,7 @@
         </div>
         <div class="row" style="margin-top: 20px">
             <div class="col-sm-6 col-sm-offset-3">
-                <div class="panel panel-default">
+                <div class="panel panel-default" style="-webkit-filter: drop-shadow(1px 2px 2px rgba(227,72,0,0.2)); background-color: #fffffe">
                     <div class="panel-heading">
                         <h3 class="panel-title">National ID Number</h3>
                     </div>
