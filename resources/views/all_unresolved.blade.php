@@ -7,12 +7,12 @@
                 <table class="table table-bordered table-hover" style="-webkit-filter: drop-shadow(1px 2px 2px gray); margin: 2px; background-color: #fffffe">
                     <thead>
                     <tr>
-                        <th style="text-align: center">#</th>
-                        <th style="text-align: center">NIC</th>
-                        <th style="text-align: center">Name</th>
-                        <th style="text-align: center">Telephone</th>
-                        <th style="text-align: center">Address</th>
-                        <th style="text-align: center">Unresolved issues</th>
+                    <th style="text-align: center">#</th>
+                        <th style="text-align: center">ජා.හැ.අං</th>
+                        <th style="text-align: center">නම</th>
+                        <th style="text-align: center">දුරකථන අංකය</th>
+                        <th style="text-align: center">ලිපිනය</th>
+                        <th style="text-align: center">නොවිසදුන කාර්‍ය</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -25,7 +25,7 @@
                             @else
                                 <tr class="bg-danger">
                                     @endif
-                                    <td style="text-align: center">{{$i++}}</td>
+                                    <td style="text-align: center">{{ (($customers->currentPage() - 1 ) * $customers->perPage() ) + $loop->iteration }}</td>
                                     <td style="text-align: center"><a href="/check/id?nic={{$customer->nic}}">{{$customer->nic}}</a></td>
                                     <td style="text-align: center">{{$customer->name}}</td>
                                     <td style="text-align: center">{{$customer->mobile}}</td>
@@ -44,7 +44,7 @@
         <div class="row" style="margin-top: 20px">
             <div class="col-md-2 col-md-offset-5" align="center">
                 @if(isset($_SERVER['HTTP_REFERER']))
-                    <a href="{{$_SERVER['HTTP_REFERER']}}" class="btn btn-default">Back</a>
+                    <a href="{{$_SERVER['HTTP_REFERER']}}" class="btn btn-default">අාපසු</a>
                 @endif
             </div>
         </div>

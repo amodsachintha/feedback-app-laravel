@@ -7,31 +7,31 @@
                 {{--NEW REGISTRATION--}}
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Register New</h3>
+                        <h3 class="panel-title">නව ලියාපදිංචි වීම්</h3>
                     </div>
                     <div class="panel-body">
                         <form action="/add/customer" method="POST">
                             <div class="form-group">
-                                <label for="nic">National ID Card</label>
+                                <label for="nic">ජාතික හැඳුනුම්පත් අංකය</label>
                                 <input type="text" class="form-control " name="nic_value" value="{{$nic}}" disabled>
                             </div>
                             <input type="hidden" name="nic" value="{{$nic}}">
                             <div class="form-group">
-                                <label for="name">Name</label>
+                                <label for="name">නම</label>
                                 <input type="text" class="form-control " name="name" required>
                             </div>
                             <div class="form-group">
-                                <label for="mobile">Telephone</label>
+                                <label for="mobile">දුරකථන අංකය</label>
                                 <input type="text" class="form-control " name="mobile">
                             </div>
                             <div class="form-group">
-                                <label for="address">Address</label>
+                                <label for="address">ලිපිනය</label>
                                 <input type="text" class="form-control " name="address" required>
                             </div>
 
                             {{--DATALIST OF SERVICES--}}
                             <div class="form-group">
-                                <label for="service_id">Select Service</label>
+                                <label for="service_id">සේවාව තෝරන්න</label>
                                 @if(isset($services))
                                     <select id="service_id" name="service_id" class="form-control" required>
                                         @foreach($services as $service)
@@ -42,7 +42,7 @@
                                 {{--<input type="text" class="form-control " name="service_id">--}}
                             </div>
                             <div class="form-group">
-                                <label for="service_des">Description</label>
+                                <label for="service_des">වෙනත් විස්තර</label>
                                 <input type="text" class="form-control " name="service_des">
                             </div>
 

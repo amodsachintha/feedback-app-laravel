@@ -153,16 +153,16 @@ class AppController extends Controller
                     ->groupBy('customer_nic')
                     ->orderBy('feedback_customers.created_at','DESC')
                     ->paginate(10);
-        $i=1;
-        return view('all_unresolved',['customers'=>$customers,'i'=>$i]);
+
+        return view('all_unresolved',['customers'=>$customers]);
     }
 
     public function viewAllCustomers(){
         $customers = DB::table('feedback_customers')
             ->orderBy('feedback_customers.created_at','DESC')
             ->paginate(10);
-        $i=1;
-        return view('all_customers',['customers'=>$customers,'i'=>$i]);
+
+        return view('all_customers',['customers'=>$customers]);
     }
 
 

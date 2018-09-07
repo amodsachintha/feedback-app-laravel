@@ -6,26 +6,26 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-success" style="-webkit-filter: drop-shadow(1px 2px 2px #09a21c); background-color: #fffffe">
                     <div class="panel-heading">
-                        Person Info
+                        පුද්ගලයාගේ විස්තර
                     </div>
                     <div class="panel-body">
                         @if(isset($customer))
                             <table class="table table-hover" style="font-size: 15px">
                                 <tbody>
                                 <tr>
-                                    <td>Name:</td>
+                                    <td>නම:</td>
                                     <td><strong>{{$customer->name}}</strong></td>
                                 </tr>
                                 <tr>
-                                    <td>NIC:</td>
+                                    <td>ජා.හැ.අං:</td>
                                     <td><strong>{{$customer->nic}}</strong></td>
                                 </tr>
                                 <tr>
-                                    <td>Telephone:</td>
+                                    <td>දුරකථන අංකය:</td>
                                     <td><strong>{{$customer->mobile}}</strong></td>
                                 </tr>
                                 <tr>
-                                    <td>Address:</td>
+                                    <td>ලිපිනය:</td>
                                     <td><strong>{{$customer->address}}</strong></td>
                                 </tr>
                                 <tr>
@@ -43,13 +43,13 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default" style="-webkit-filter: drop-shadow(1px 2px 2px gray); background-color: #fffffe">
                     <div class="panel-heading">
-                        Record New Service
+                        නව කාර්‍යක් අැතුලත් කරන්න
                     </div>
                     <div class="panel-body">
                         <input type="hidden" id="s_nic" name="s_nic" value="{{$customer->nic}}">
 
                         <div class="form-group">
-                            <label for="service_id">Select Service</label>
+                            <label for="service_id">කාර්‍ය තෝරන්න</label>
                             @if(isset($services))
                                 <select id="s_service_id" name="s_service_id" class="form-control" required>
                                     @foreach($services as $service)
@@ -59,7 +59,7 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="service_des">Description</label>
+                            <label for="service_des">වෙනත් විස්තර</label>
                             <input type="text" class="form-control " name="s_service_des" id="s_service_des">
                         </div>
 
@@ -75,7 +75,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-primary" style="-webkit-filter: drop-shadow(1px 2px 2px #006dad); background-color: #fffffe">
                     <div class="panel-heading">
-                        සක්රීය සේවා
+                        සක්‍රිය සේවා
                     </div>
                     <div class="panel-body">
                         @if(isset($pending))
@@ -94,23 +94,20 @@
                                                                 </div>
                                                                 <div class="panel-body">
                                                                     @if($service->description != "" || $service->description != null)
-                                                                        <p>Description: <strong>{{$service->description}}</strong></p>
+                                                                        <p>වෙනත් විස්තර: <strong>{{$service->description}}</strong></p>
                                                                     @endif
-                                                                    <p>First Visit: <strong>{{date('d M Y h:i:s A',strtotime($service->date_time))}}</strong></p>
+                                                                    <p>පළමු පැමිණීම: <strong>{{date('d M Y h:i:s A',strtotime($service->date_time))}}</strong></p>
                                                                     @if($service->n != 1)
-                                                                        <p>Last Visit: <strong>{{date('d M Y h:i:s A',strtotime($service->updated_at))}}</strong></p>
+                                                                        <p>අවසන් පැමිණීම: <strong>{{date('d M Y h:i:s A',strtotime($service->updated_at))}}</strong></p>
                                                                     @endif
-                                                                    <p>Visits: <strong>{{$service->n}}</strong></p>
+                                                                    <p>පැමිණි වාර ගණන: <strong>{{$service->n}}</strong></p>
                                                                     <p>
                                                                         <button class="btn btn-primary"
                                                                                 onclick="if(confirm('Are you sure?')) setResolved('{{$customer->nic}}','{{$service->service_id}}')"
-                                                                                style="margin-right: 30px">Set Resolved
+                                                                                style="margin-right: 30px">විසඳූ බවට වාර්තා කරන්න
                                                                         </button>
                                                                         <button class="btn btn-danger"
-                                                                                onclick="if(confirm('Are you sure?')) incrementVisit('{{$customer->nic}}','{{$service->service_id}}','{{$service->n}}')">
-                                                                            Update
-                                                                            Visit
-                                                                        </button>
+                                                                                onclick="if(confirm('Are you sure?')) incrementVisit('{{$customer->nic}}','{{$service->service_id}}','{{$service->n}}')">පැමිණීම සටහන් කරන්න</button>
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -125,7 +122,7 @@
                 <div class="row" style="margin-top: 20px">
                     <div class="col-md-2 col-md-offset-5" align="center">
                         @if(isset($_SERVER['HTTP_REFERER']))
-                            <a href="{{$_SERVER['HTTP_REFERER']}}" class="btn btn-default">Back</a>
+                            <a href="{{$_SERVER['HTTP_REFERER']}}" class="btn btn-default">අාපසු</a>
                         @endif
                     </div>
                 </div>
