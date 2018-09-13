@@ -84,7 +84,7 @@ class AppController extends Controller
 
         $services_pending = DB::table('feedback_service_records')
             ->join('feedback_services', 'feedback_service_records.service_id', 'feedback_services.id')
-            ->select('feedback_service_records.*')
+            ->select('feedback_service_records.*','feedback_services.service')
             ->where('feedback_service_records.customer_nic', $nic)
             ->where('feedback_service_records.resolved', false)
             ->get();
