@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Feedback App v1.0</title>
+    <title>Reception Application v1.0</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" media="all">
@@ -19,7 +19,7 @@
         <div class="container" style="padding-bottom: 5px;">
             <div class="navbar-header">
                 <a class="navbar-brand" href="{{ url('/') }}" style="margin-top: -7px">
-                    <label style="color: black"><img src="{{asset("img/logo.png")}}" height="40px"> &nbsp;Feedback App v1.0</label>
+                    <p style="color: black"><img src="{{asset("img/logo.png")}}" height="40px"> &nbsp;<strong>Reception Application v1.0</strong></p>
                 </a>
             </div>
             <div class="navbar-right" style="padding-top: 7px;">
