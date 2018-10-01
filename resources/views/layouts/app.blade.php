@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Reception Application v1.0</title>
+    <title>Reception Application v1.1</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" media="all">
@@ -23,8 +23,9 @@
                 </a>
             </div>
             <div class="navbar-right" style="padding-top: 7px;">
-                <a href="/view/customers/all/unresolved" class="btn btn-danger" >View All Unresolved</a>
-                <a href="/view/customers/all/all" class="btn btn-default">View All Customers</a>
+                <a href="/view/summary?month={{date('m')}}" class="btn btn-link" >Summary</a>
+                <a href="/view/customers/all/unresolved" class="btn btn-link" ><strong>View All Unresolved</strong></a>
+                <a href="/view/customers/all/all" class="btn btn-link">View All Customers</a>
             </div>
         </div>
     </nav>
