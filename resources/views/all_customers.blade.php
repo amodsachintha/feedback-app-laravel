@@ -4,7 +4,7 @@
     <div class="container" style="font-family: sans-serif">
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-bordered table-hover" style="-webkit-filter: drop-shadow(1px 2px 2px gray); margin: 2px; background-color: #fffffe">
+                <table class="table table-bordered table-hover table-condensed" style="-webkit-filter: drop-shadow(1px 2px 2px gray); margin: 2px; background-color: #fffffe">
                     <thead>
                     <tr>
                         <th style="text-align: center">#</th>
@@ -13,6 +13,7 @@
                         <th style="text-align: center">දුරකථන අංකය</th>
                         <th style="text-align: center">ලිපිනය</th>
                         <th style="text-align: center">දත්ත අැතුලත් කල දිනය</th>
+                        <th style="text-align: center">services</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -25,6 +26,7 @@
                                 <td style="text-align: center">{{$customer->mobile}}</td>
                                 <td style="text-align: center">{{$customer->address}}</td>
                                 <td style="text-align: center">{{date('d M Y h:i:s A',strtotime($customer->created_at))}}</td>
+                                <td style="text-align: center"><a href="/view/customer?nic={{$customer->nic}}" class="btn btn-sm btn-primary">View</a></td>
                             </tr>
                         @endforeach
                     @endif

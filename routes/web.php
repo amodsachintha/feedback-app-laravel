@@ -19,6 +19,7 @@ Route::get('/view/customers/all/unresolved','AppController@viewAllUnresolvedCust
 Route::get('/view/customers/all/all','AppController@viewAllCustomers');
 Route::get('/view/summary','AppController@showSummary');
 Route::get('/view/all','AppController@showSummaryAll');
+Route::get('/view/customer','AppController@showCustomerServiceHistory');
 
 
 Route::get('/check/id','AppController@checkID');

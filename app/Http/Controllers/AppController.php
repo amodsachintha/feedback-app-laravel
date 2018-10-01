@@ -273,4 +273,32 @@ class AppController extends Controller
     }
 
 
+    public function showCustomerServiceHistory(Request $request)
+    {
+        if ($request->has('nic')) {
+            $nic = $request->get('nic');
+
+            $customer = DB::table('feedback_customers')
+                ->where('nic', $nic)
+                ->first();
+
+            $services = DB::table('feedback_service_records')
+                ->join('feedback_services', 'feedback_service_records.service_id', 'feedback_services.id')
+                ->select(['service', 'n', 'feedback_service_records.updated_at', 'resolved'])
+                ->where('customer_nic', $nic)
+                ->orderBy('updated_at', 'DESC')
+                ->get();
+
+            return view('cust_services')->with([
+                'customer' => $customer,
+                'services' => $services,
+            ]);
+
+        }
+
+        return response()->json(null, 500);
+
+    }
+
+
 }

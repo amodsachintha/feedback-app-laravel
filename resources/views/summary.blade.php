@@ -23,7 +23,7 @@
         @endif
 
         <div class="row" style="margin-bottom: 20px">
-            <div class="col-md-10 col-md-offset-1 hidden-print" align="center">
+            <div class="col-md-10 col-md-offset-1" align="center">
                 @if(isset($month))
                    <h3>{{date('Y F',strtotime(date('Y-'.$month)))}} ස‍ඳහා</h3>
                 @else
@@ -47,7 +47,7 @@
                                 </strong>
                             </div>
                             <div class="panel-body">
-                                <table class="table table-condensed table-responsive" style="text-align: center">
+                                <table class="table table-condensed table-responsive table-bordered" style="text-align: center; color: black">
                                     <thead>
                                     <tr>
                                         <th style="text-align: center">ජා.හැ.අං</th>
