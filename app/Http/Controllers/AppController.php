@@ -117,11 +117,11 @@ class AppController extends Controller
     public function setResolved(Request $request)
     {
         $nic = $request->get('nic');
-        $service_id = $request->get('service_id');
+        $id = $request->get('service_id');
 
         DB::table('feedback_service_records')
             ->where('customer_nic', $nic)
-            ->where('service_id', $service_id)
+            ->where('id', $id)
             ->update([
                 'resolved' => true,
                 'updated_at' => Carbon::now(),
@@ -133,12 +133,12 @@ class AppController extends Controller
     public function incrementVisit(Request $request)
     {
         $nic = $request->get('nic');
-        $service_id = $request->get('service_id');
+        $id = $request->get('service_id');
         $n = intval($request->get('n')) + 1;
 
         DB::table('feedback_service_records')
             ->where('customer_nic', $nic)
-            ->where('service_id', $service_id)
+            ->where('id', $id)
             ->update([
                 'n' => $n,
                 'updated_at' => Carbon::now(),

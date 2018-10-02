@@ -103,11 +103,11 @@
                                                                     <p>පැමිණි වාර ගණන: <strong>{{$service->n}}</strong></p>
                                                                     <p>
                                                                         <button class="btn btn-primary"
-                                                                                onclick="if(confirm('Are you sure?')) setResolved('{{$customer->nic}}','{{$service->service_id}}')"
+                                                                                onclick="if(confirm('Are you sure?')) setResolved('{{$customer->nic}}','{{$service->id}}')"
                                                                                 style="margin-right: 30px">විසඳූ බවට වාර්තා කරන්න
                                                                         </button>
                                                                         <button class="btn btn-danger"
-                                                                                onclick="if(confirm('Are you sure?')) incrementVisit('{{$customer->nic}}','{{$service->service_id}}','{{$service->n}}')">පැමිණීම සටහන් කරන්න</button>
+                                                                                onclick="if(confirm('Are you sure?')) incrementVisit('{{$customer->nic}}','{{$service->id}}','{{$service->n}}')">පැමිණීම සටහන් කරන්න</button>
                                                                     </p>
                                                                 </div>
                                                             </div>

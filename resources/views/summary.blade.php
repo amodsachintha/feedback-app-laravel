@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         @if(isset($months))
-            <div class="row" style="margin-bottom: 20px">
+            <div class="row hidden-print" style="margin-bottom: 20px">
                 <div class="col-md-10 col-md-offset-1 hidden-print" align="center">
                     <div class="btn-group" role="group">
                         @foreach($months as $m)
