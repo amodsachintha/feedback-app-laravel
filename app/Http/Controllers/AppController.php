@@ -5,9 +5,19 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class AppController extends Controller
 {
+
+    public function __construct()
+    {
+        if (!Session::has('summary_year')) {
+            session(['summary_year' => date('Y')]);
+        }
+    }
+
+
     public function checkID(Request $request)
     {
         $nic = $request->get('nic');
@@ -172,7 +182,7 @@ class AppController extends Controller
 
     public function showSummary(Request $request)
     {
-
+        $year = $request->get('year');
         if ($request->has('month')) {
             $month = $request->get('month');
         } else {
@@ -180,14 +190,19 @@ class AppController extends Controller
         }
 
         $months = [];
-        for ($i = 1; $i <= intval(date('m')); $i++)
-            array_push($months, strval(date('F', strtotime(date('Y-' . $i . '-1')))));
+        if ($year != strval(date('Y'))) {
+            for ($i = 1; $i <= 12; $i++)
+                array_push($months, strval(date('F', strtotime(date($year . '-' . $i . '-1')))));
+        } else {
+            for ($i = 1; $i <= intval(date('m')); $i++)
+                array_push($months, strval(date('F', strtotime(date($year . '-' . $i . '-1')))));
+        }
 
 
         $service_ids = DB::table('feedback_service_records')
             ->select(['service_id'])
-            ->where('updated_at', '>=', date('Y-' . intval($month) . '-1'))
-            ->where('updated_at', '<=', date('Y-' . intval($month) . '-31'))
+            ->where('updated_at', '>=', date($year . '-' . intval($month) . '-1'))
+            ->where('updated_at', '<=', date($year . '-' . intval($month) . '-31'))
             ->groupBy('service_id')
             ->orderBy('service_id', 'ASC')
             ->get();
@@ -195,8 +210,8 @@ class AppController extends Controller
         $services = DB::table('feedback_service_records')
             ->join('feedback_services', 'feedback_service_records.service_id', 'feedback_services.id')
             ->select(['feedback_services.id', 'feedback_services.service'])
-            ->where('feedback_service_records.updated_at', '>=', date('Y-' . intval($month) . '-1'))
-            ->where('feedback_service_records.updated_at', '<=', date('Y-' . intval($month) . '-31'))
+            ->where('feedback_service_records.updated_at', '>=', date($year . '-' . intval($month) . '-1'))
+            ->where('feedback_service_records.updated_at', '<=', date($year . '-' . intval($month) . '-31'))
             ->groupBy('feedback_service_records.service_id')
             ->orderBy('feedback_service_records.service_id', 'ASC')
             ->get();
@@ -207,8 +222,8 @@ class AppController extends Controller
             $custs = DB::table('feedback_customers')
                 ->join('feedback_service_records', 'feedback_service_records.customer_nic', 'feedback_customers.nic')
                 ->select(['name', 'nic', 'mobile', 'date_time', 'feedback_service_records.updated_at', 'resolved', 'n'])
-                ->where('feedback_service_records.updated_at', '>=', date('Y-' . intval($month) . '-1'))
-                ->where('feedback_service_records.updated_at', '<=', date('Y-' . intval($month) . '-31'))
+                ->where('feedback_service_records.updated_at', '>=', date($year . '-' . intval($month) . '-1'))
+                ->where('feedback_service_records.updated_at', '<=', date($year . '-' . intval($month) . '-31'))
                 ->where('feedback_service_records.service_id', $ids->service_id)
                 ->orderBy('feedback_service_records.updated_at', 'DESC')
                 ->get();
@@ -226,16 +241,22 @@ class AppController extends Controller
         ]);
     }
 
-    public function showSummaryAll()
+    public function showSummaryAll(Request $request)
     {
+        $year = $request->get('year');
         $months = [];
-        for ($i = 1; $i <= intval(date('m')); $i++)
-            array_push($months, strval(date('F', strtotime(date('Y-' . $i . '-1')))));
+        if ($year != strval(date('Y'))) {
+            for ($i = 1; $i <= 12; $i++)
+                array_push($months, strval(date('F', strtotime(date($year . '-' . $i . '-1')))));
+        } else {
+            for ($i = 1; $i <= intval(date('m')); $i++)
+                array_push($months, strval(date('F', strtotime(date($year . '-' . $i . '-1')))));
+        }
 
         $service_ids = DB::table('feedback_service_records')
             ->select(['service_id'])
-            ->where('updated_at', '>=', date('Y-1-1'))
-            ->where('updated_at', '<=', date('Y-12-31'))
+            ->where('updated_at', '>=', date($year . '-1-1'))
+            ->where('updated_at', '<=', date($year . '-12-31'))
             ->groupBy('service_id')
             ->orderBy('service_id', 'ASC')
             ->get();
@@ -243,8 +264,8 @@ class AppController extends Controller
         $services = DB::table('feedback_service_records')
             ->join('feedback_services', 'feedback_service_records.service_id', 'feedback_services.id')
             ->select(['feedback_services.id', 'feedback_services.service'])
-            ->where('feedback_service_records.updated_at', '>=', date('Y-1-1'))
-            ->where('feedback_service_records.updated_at', '<=', date('Y-12-31'))
+            ->where('feedback_service_records.updated_at', '>=', date($year . '-1-1'))
+            ->where('feedback_service_records.updated_at', '<=', date($year . '-12-31'))
             ->groupBy('feedback_service_records.service_id')
             ->orderBy('feedback_service_records.service_id', 'ASC')
             ->get();
@@ -255,8 +276,8 @@ class AppController extends Controller
             $custs = DB::table('feedback_customers')
                 ->join('feedback_service_records', 'feedback_service_records.customer_nic', 'feedback_customers.nic')
                 ->select(['name', 'nic', 'mobile', 'date_time', 'feedback_service_records.updated_at', 'resolved', 'n'])
-                ->where('feedback_service_records.updated_at', '>=', date('Y-1-1'))
-                ->where('feedback_service_records.updated_at', '<=', date('Y-12-31'))
+                ->where('feedback_service_records.updated_at', '>=', date($year . '-1-1'))
+                ->where('feedback_service_records.updated_at', '<=', date($year . '-12-31'))
                 ->where('feedback_service_records.service_id', $ids->service_id)
                 ->orderBy('feedback_service_records.updated_at', 'DESC')
                 ->get();
@@ -298,6 +319,13 @@ class AppController extends Controller
 
         return response()->json(null, 500);
 
+    }
+
+
+    public function setYearInSession(Request $request)
+    {
+        session(['summary_year' => $request->get('year')]);
+        return redirect('/view/all?year=' . \session('summary_year'));
     }
 
 

@@ -15,7 +15,7 @@
                     <div class="panel-body">
                         <form action="/check/id" method="GET">
                             <div class="form-group">
-                                <input type="text" class="form-control " name="nic" min="9" max="11" required>
+                                <input type="text" class="form-control " name="nic" min="9" max="12" required>
                                 <code>
                                     <small>**ජාතික හැඳුනුම්පත් අංකය මෙතන අැතුලත් කරන්න</small>
                                 </code>

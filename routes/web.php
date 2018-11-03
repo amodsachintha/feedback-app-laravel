@@ -31,3 +31,6 @@ Route::get('/add/servicerecord','AppController@addServiceRecord');
 
 Route::get('/update/service/visit','AppController@incrementVisit');
 Route::get('/update/service/resolve','AppController@setResolved');
+
+
+Route::get('/set/year','AppController@setYearInSession');

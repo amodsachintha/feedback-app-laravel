@@ -3,20 +3,34 @@
     <div class="container">
         @if(isset($months))
             <div class="row hidden-print" style="margin-bottom: 20px">
-                <div class="col-md-10 col-md-offset-1 hidden-print" align="center">
+                <div class="col-md-2">
+                    <form action="/set/year" class="form-inline">
+                        <label for="year">Year: </label>
+                        <select name="year" id="year" class="form-control" onchange='if(this.value != 0) { this.form.submit(); }'>
+                            @for($i = 2016; $i <= intval(date('Y')); $i++)
+                                @if($i == intval(session('summary_year')))
+                                    <option value="{{$i}}" selected>{{$i}}</option>
+                                @else
+                                    <option value="{{$i}}">{{$i}}</option>
+                                @endif
+                            @endfor
+                        </select>
+                    </form>
+                </div>
+                <div class="col-md-10 hidden-print" align="left">
                     <div class="btn-group" role="group">
                         @foreach($months as $m)
                             @if(isset($month))
                                 @if($loop->iteration == $month)
-                                    <a href="/view/summary?month={{$loop->iteration}}" type="button" class="btn btn-primary active">{{$m}}</a>
+                                    <a href="/view/summary?month={{$loop->iteration}}&year={{session('summary_year')}}" type="button" class="btn btn-primary active">{{$m}}</a>
                                 @else
-                                    <a href="/view/summary?month={{$loop->iteration}}" type="button" class="btn btn-primary">{{$m}}</a>
+                                    <a href="/view/summary?month={{$loop->iteration}}&year={{session('summary_year')}}" type="button" class="btn btn-primary">{{$m}}</a>
                                 @endif
                             @else
-                                <a href="/view/summary?month={{$loop->iteration}}" type="button" class="btn btn-primary">{{$m}}</a>
+                                <a href="/view/summary?month={{$loop->iteration}}&year={{session('summary_year')}}" type="button" class="btn btn-primary">{{$m}}</a>
                             @endif
                         @endforeach
-                        <a href="/view/all" type="button" class="btn btn-danger">{{date('Y')}}</a>
+                            <a href="/view/all?year={{session('summary_year')}}" type="button" class="btn btn-danger">{{session('summary_year')}}</a>
                     </div>
                 </div>
             </div>
@@ -25,9 +39,9 @@
         <div class="row" style="margin-bottom: 20px">
             <div class="col-md-10 col-md-offset-1" align="center">
                 @if(isset($month))
-                   <h3>{{date('Y F',strtotime(date('Y-'.$month)))}} ස‍ඳහා</h3>
+                    <h3>{{date('Y F',strtotime(date(session('summary_year').'-'.$month)))}} ස‍ඳහා</h3>
                 @else
-                    <h3>{{date('Y',strtotime(date('Y')))}} වර්ෂය ස‍ඳහා</h3>
+                    <h3>{{date('Y',strtotime(date(session('summary_year').'-01-01')))}} වර්ෂය ස‍ඳහා</h3>
                 @endif
             </div>
         </div>
